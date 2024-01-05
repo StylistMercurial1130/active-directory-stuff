@@ -1,7 +1,7 @@
 ﻿using System.DirectoryServices;
 using System.DirectoryServices.ActiveDirectory;
 
-var username = "DOM051902\\Administrator";
+var username = "dom051902.lab";
 var password = "Control123";
 
 DirectoryContext context = new DirectoryContext(DirectoryContextType.Forest,username,password);
