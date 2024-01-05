@@ -5,5 +5,7 @@ DirectoryEntry connection() {
 }
 
 var de = connection();
-
-Console.WriteLine(de.Name);
+DirectoryEntries children = de.Children;
+foreach(DirectoryEntry child in children) {
+    Console.WriteLine(child.Name);
+}
