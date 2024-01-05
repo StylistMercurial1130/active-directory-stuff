@@ -7,5 +7,5 @@ DirectoryEntry connection() {
 var de = connection();
 DirectoryEntries children = de.Children;
 foreach(DirectoryEntry child in children) {
-    Console.WriteLine(child.Name);
+    Console.WriteLine(child.Children.ToString());
 }
