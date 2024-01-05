@@ -1,5 +1,4 @@
-﻿using System.DirectoryServices;
-using System.DirectoryServices.ActiveDirectory;
+﻿using System.DirectoryServices.ActiveDirectory;
 
 var domain = Domain.GetDomain(
     new DirectoryContext(
@@ -7,4 +6,8 @@ var domain = Domain.GetDomain(
         "dom051902.lab",
         "DOM051902\\Administrator","Control123")
 );
-
+Console.WriteLine(domain.Name);
+var forest = domain.Forest;
+foreach(Domain dom in forest.Domains) {
+    Console.WriteLine("domain : " + dom.Name);
+}
