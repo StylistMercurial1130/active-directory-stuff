@@ -1,14 +1,13 @@
 ﻿using System.DirectoryServices;
-using System.DirectoryServices.ActiveDirectory;
+using Microsoft.Win32;
 
-var username = "dom051902.lab";
-var password = "Control123";
+var path = "GC://dom051902.lab";
 
-DirectoryContext context = new DirectoryContext(DirectoryContextType.Forest,username,password);
-Domain domain = Domain.GetDomain(context);
+try {
+    using (var root = new DirectoryEntry(path,"DOM051902\\Administrator","Control123")) {
+        Console.WriteLine(root.Name);
+    }
 
-Console.WriteLine(domain.Name);
+} catch (DirectoryServicesCOMException) {
 
-foreach(Domain child in domain.Children) {
-    Console.WriteLine($"child domain : {child.Name}");
 }
