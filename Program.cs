@@ -1,11 +1,14 @@
 ﻿using System.DirectoryServices;
+using System.DirectoryServices.ActiveDirectory;
 
-DirectoryEntry connection() {
-    return new DirectoryEntry("LDAP://dom051902.lab","DOM051902\\Administrator","Control123",AuthenticationTypes.Secure);
-}
+var username = "DOM051902\\Administrator";
+var password = "Control123";
 
-var de = connection();
-DirectoryEntries children = de.Children;
-foreach(DirectoryEntry child in children) {
-    Console.WriteLine(child.Children.ToString());
+DirectoryContext context = new DirectoryContext(DirectoryContextType.Forest,username,password);
+Domain domain = Domain.GetDomain(context);
+
+Console.WriteLine(domain.Name);
+
+foreach(Domain child in domain.Children) {
+    Console.WriteLine($"child domain : {child.Name}");
 }
