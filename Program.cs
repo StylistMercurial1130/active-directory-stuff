@@ -25,7 +25,9 @@ class Program {
 			adObjects.Append(current.GetDirectoryEntry());
 		}
 		
-		adObjects.ForEach(obj => Console.WriteLine(obj.Name));
+		adObjects.ForEach(obj => {
+			Console.WriteLine($"adobject : {obj.Name}");
+		});
 		
     }
 }
