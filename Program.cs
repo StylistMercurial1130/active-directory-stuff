@@ -7,7 +7,7 @@ class Program {
         var username = "DOM051902\\Administrator"; 
         var password = "Control123";
      
-		DirectoryContext context = new DirectoryContext(DirectoryContextType.Forest,path,username,password);	
+		DirectoryContext context = new DirectoryContext(DirectoryContextType.Domain,path,username,password);	
 		Forest forest = Domain.GetDomain(context).Forest;
 
 		DirectoryEntry de = forest.RootDomain.GetDirectoryEntry();
