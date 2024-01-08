@@ -21,6 +21,7 @@ class Program {
             foreach(System.Collections.DictionaryEntry props in value.Properties) {
                 Console.WriteLine(props.Key + ":" + value.Properties[props.Key.ToString()][0]);
             }
+			Console.WriteLine();
         }
     }
 }
