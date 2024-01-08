@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.DirectoryServices;
-using System.DirectoryServices.ActiveDirectory;
-using System.Security.Cryptography;
+﻿using System.DirectoryServices;
 
 class Program {
     public static void Main(String []args) {
@@ -14,7 +11,7 @@ class Program {
             );
         DirectorySearcher searcher = new DirectorySearcher();
         searcher.SearchScope = SearchScope.Subtree;
-        searcher.Filter = "(&(objectCategory=computer)(userAccountControl:1.2.840.113556.1.4.803:=8192)(!primaryGroupID=521))";
+        searcher.Filter = "(&(objectCategory=computer)(sAMAccountType=805306369))";
         searcher.PageSize = 1000;
         SearchResultCollection results = searcher.FindAll();
         foreach(SearchResult value in results) {
