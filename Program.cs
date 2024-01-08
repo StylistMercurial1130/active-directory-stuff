@@ -18,7 +18,7 @@ class Program {
         searcher.PageSize = 1000;
         SearchResultCollection results = searcher.FindAll();
         foreach(SearchResult value in results) {
-            foreach(ResultPropertyCollection props in value.Properties) {
+            foreach(DirectoryEntry props in value.Properties) {
                 Console.WriteLine(props.ToString());
             }
         }
