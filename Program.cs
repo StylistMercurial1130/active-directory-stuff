@@ -18,8 +18,8 @@ class Program {
         searcher.PageSize = 1000;
         SearchResultCollection results = searcher.FindAll();
         foreach(SearchResult value in results) {
-            foreach(DirectoryEntry props in value.Properties) {
-                Console.WriteLine(props.ToString());
+            foreach(System.Collections.DictionaryEntry props in value.Properties) {
+                Console.WriteLine(props.Key + " : " + props.Value);
             }
         }
     }
