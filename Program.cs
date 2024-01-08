@@ -22,7 +22,7 @@ class Program {
 				adObjectsQueue.Enqueue(dom);	
 			}
 			DirectoryEntry entry = current.GetDirectoryEntry();
-			Console.WriteLine(entry.ToString());	
+			Console.WriteLine(entry.Properties.ToString());
 		}
     }
 }
