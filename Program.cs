@@ -14,7 +14,7 @@ class Program {
             );
         DirectorySearcher searcher = new DirectorySearcher();
         searcher.SearchScope = SearchScope.Subtree;
-        searcher.Filter = "&(objectCategory=computer)(userAccountControl:1.2.840.113556.1.4.803:=8192)(!primaryGroupID=521)";
+        searcher.Filter = "&((objectCategory=computer)(userAccountControl:1.2.840.113556.1.4.803:=8192)(!primaryGroupID=521))";
         searcher.PageSize = 1000;
         SearchResultCollection results = searcher.FindAll();
         foreach(SearchResult value in results) {
