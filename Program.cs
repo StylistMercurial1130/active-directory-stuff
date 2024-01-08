@@ -10,16 +10,9 @@ class Program {
             new DirectoryEntry(
                 path,username,password,AuthenticationTypes.Secure
             );
-        DirectorySearcher searcher = new DirectorySearcher();
-        searcher.SearchScope = SearchScope.Subtree;
-        searcher.Filter = "(&(objectCategory=computer)(sAMAccountType=805306369))";
-        searcher.PageSize = 1000;
-        SearchResultCollection results = searcher.FindAll();
-        foreach(SearchResult result in results) {
-        	var objectSid = (byte [])(result.Properties["objectSid"][0]);
-			var sid = new SecurityIdentifier(objectSid,0);
-			var account = sid.Translate(typeof(NTAccount));
-			Console.WriteLine(account.ToString());
-        }
+		foreach(DirectoryEntry child in directoryEntry.Children) {
+			string computerName = child.Name;
+			if(computerName != "") Console.WriteLine(computerName);
+		}
     }
 }
