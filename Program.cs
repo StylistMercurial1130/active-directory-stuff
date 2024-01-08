@@ -1,4 +1,5 @@
 ﻿using System.DirectoryServices;
+using System.Security.Principal;
 
 class Program {
     public static void Main(String []args) {
@@ -14,11 +15,11 @@ class Program {
         searcher.Filter = "(&(objectCategory=computer)(sAMAccountType=805306369))";
         searcher.PageSize = 1000;
         SearchResultCollection results = searcher.FindAll();
-        foreach(SearchResult value in results) {
-            foreach(System.Collections.DictionaryEntry props in value.Properties) {
-                Console.WriteLine(props.Key + ":" + value.Properties[props.Key.ToString()][0]);
-            }
-			Console.WriteLine();
+        foreach(SearchResult result in results) {
+        	var objectSid = (byte [])(result.Properties["objectSid"][0]);
+			var sid = new SecurityIdentifier(objectSid,0);
+			var account = sid.Translate(typeof(NTAccount));
+			Console.WriteLine(account.ToString());
         }
     }
 }
