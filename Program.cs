@@ -18,6 +18,7 @@ class Program {
 
 		while(adObjectsQueue.Count != 0) {
 			Domain current = adObjectsQueue.Dequeue();	
+			Console.WriteLine($"{current.Name} : children count : {current.Children.Count}");
 			foreach(Domain dom in current.Children) {
 				adObjectsQueue.Enqueue(dom);	
 			}
