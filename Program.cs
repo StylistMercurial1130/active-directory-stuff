@@ -1,16 +1,17 @@
-﻿using System.DirectoryServices.ActiveDirectory;
+﻿using System.DirectoryServices;
+using System.DirectoryServices.ActiveDirectory;
 
-var domain = Domain.GetDomain(
-    new DirectoryContext(
-        DirectoryContextType.Domain,
-        "dom051902.lab",
-        "DOM051902\\Administrator","Control123")
-);
-Console.WriteLine(domain.Name);
-foreach(DomainController domainController in domain.DomainControllers) {
-    Console.WriteLine($"domain controllers : {domainController.Name}");
-}
-var forest = domain.Forest;
-foreach(Domain dom in forest.Domains) {
-    Console.WriteLine("domain : " + dom.Name);
+class Program {
+    public static void Main(String []args) {
+        var path = "GC://dom051902.lab";
+        var username = "DOM051902\\Administrator"; 
+        var password = "Control123";
+        DirectoryEntry directoryEntry = 
+            new DirectoryEntry(
+                path,username,password,AuthenticationTypes.Secure
+            );
+		foreach(DirectoryEntry child in directoryEntry.Children) {
+			Console.WriteLine(child.Name);		
+		}	
+    }
 }
