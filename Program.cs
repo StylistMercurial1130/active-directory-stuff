@@ -1,5 +1,7 @@
-﻿using System.DirectoryServices;
+﻿using System.ComponentModel.DataAnnotations;
+using System.DirectoryServices;
 using System.DirectoryServices.ActiveDirectory;
+using System.Security.Cryptography;
 
 class Program {
     public static void Main(String []args) {
@@ -10,8 +12,15 @@ class Program {
             new DirectoryEntry(
                 path,username,password,AuthenticationTypes.Secure
             );
-		foreach(DirectoryEntry child in directoryEntry.Children) {
-			Console.WriteLine(child.Name);		
-		}	
+        DirectorySearcher searcher = new DirectorySearcher();
+        searcher.SearchScope = SearchScope.Subtree;
+        searcher.Filter = "&(objectCategory=computer)(userAccountControl:1.2.840.113556.1.4.803:=8192)(!primaryGroupID=521)";
+        searcher.PageSize = 1000;
+        SearchResultCollection results = searcher.FindAll();
+        foreach(SearchResult value in results) {
+            foreach(ResultPropertyCollection props in value.Properties) {
+                Console.WriteLine(props.ToString());
+            }
+        }
     }
 }
