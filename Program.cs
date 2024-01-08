@@ -1,5 +1,6 @@
 ﻿using System.DirectoryServices;
 using System.DirectoryServices.ActiveDirectory;
+using System.Collections;
 
 class Program {
     public static void Main(String []args) {
@@ -10,8 +11,20 @@ class Program {
 		DirectoryContext context = new DirectoryContext(DirectoryContextType.Domain,path,username,password);	
 		Forest forest = Domain.GetDomain(context).Forest;
 
-		DirectoryEntry de = forest.RootDomain.GetDirectoryEntry();
+		List<DirectoryEntry> adObjects = new List<DirectoryEntry>();	
+		Queue<Domain> adObjectsQueue = new Queue<Domain>();
+		
+		adObjectsQueue.Enqueue(forest.RootDomain);
 
-		Console.WriteLine(de.Name);
+		while(adObjectsQueue.Count != 0) {
+			Domain current = adObjectsQueue.Dequeue();	
+			foreach(Domain dom in current.Children) {
+				adObjectsQueue.Enqueue(dom);	
+			}
+			adObjects.Append(current.GetDirectoryEntry());
+		}
+		
+		adObjects.ForEach(obj => Console.WriteLine(obj.Name));
+		
     }
 }
