@@ -11,7 +11,6 @@ class Program {
 		DirectoryContext context = new DirectoryContext(DirectoryContextType.Domain,path,username,password);	
 		Forest forest = Domain.GetDomain(context).Forest;
 
-		List<DirectoryEntry> adObjects = new List<DirectoryEntry>();	
 		Queue<Domain> adObjectsQueue = new Queue<Domain>();
 		
 		adObjectsQueue.Enqueue(forest.RootDomain);
@@ -22,12 +21,8 @@ class Program {
 			foreach(Domain dom in current.Children) {
 				adObjectsQueue.Enqueue(dom);	
 			}
-			adObjects.Append(current.GetDirectoryEntry());
+			DirectoryEntry entry = current.GetDirectoryEntry();
+			Console.WriteLine(entry.ToString());	
 		}
-		
-		adObjects.ForEach(obj => {
-			Console.WriteLine($"adobject : {obj.Name}");
-		});
-		
     }
 }
