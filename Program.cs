@@ -19,7 +19,7 @@ class Program {
         SearchResultCollection results = searcher.FindAll();
         foreach(SearchResult value in results) {
             foreach(System.Collections.DictionaryEntry props in value.Properties) {
-                Console.WriteLine(props.Key + " : " + props.Value);
+                Console.WriteLine(props.Key + ":" + value.Properties[props.Key.ToString()][0]);
             }
         }
     }
