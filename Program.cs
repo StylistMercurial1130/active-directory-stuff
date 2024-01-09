@@ -6,7 +6,7 @@ class Program {
 	public static List<DirectoryEntry> getComputers(string domainName) {
 		DirectoryEntry directoryEntry = new DirectoryEntry($"LDAP://{domainName}");
 		DirectorySearcher searcher = new DirectorySearcher(directoryEntry);
-		searcher.Filter = "&(objectClass=computer)(sAMAccountType=805306369)";
+		searcher.Filter = "(&(objectClass=computer)(sAMAccountType=805306369))";
 		List<DirectoryEntry> computers = new List<DirectoryEntry>();		
 		
 		foreach(SearchResult result in searcher.FindAll()) {
