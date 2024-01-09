@@ -22,9 +22,20 @@ class Program {
 				adObjectsQueue.Enqueue(dom);	
 			}
 			DirectoryEntry de = current.GetDirectoryEntry();
-			if(de != null) adObjects.Add(de);
+			adObjects.Add(de);
 		}
+		
+		string filter = "$(&(objectCategory=computer)(sAMAccountType=805306369))";
 
-		Console.WriteLine(adObjects.Count);
+		adObjects.ForEach(domain => {
+			DirectorySearcher searcher = new DirectorySearcher(domain);
+			searcher.SearchScope = SearchScope.Subtree;
+			searcher.Filter = filter;	
+			SearchResultCollection result = searcher.FindAll();
+			foreach(SearchResult res in result) {
+				Console.WriteLine(res.GetType().ToString());
+			}
+		});
+		
     }
 }
