@@ -12,7 +12,7 @@ class Program {
 		Forest forest = Domain.GetDomain(context).Forest;
 
 		Queue<Domain> adObjectsQueue = new Queue<Domain>();
-		
+		List<DirectoryEntry> adObjects = new List<DirectoryEntry>();	
 		adObjectsQueue.Enqueue(forest.RootDomain);
 
 		while(adObjectsQueue.Count != 0) {
@@ -21,10 +21,9 @@ class Program {
 			foreach(Domain dom in current.Children) {
 				adObjectsQueue.Enqueue(dom);	
 			}
-			DirectoryEntry entry = current.GetDirectoryEntry();
-			foreach(PropertyValueCollection prop in entry.Properties) {
-				Console.WriteLine($"{prop.PropertyName} , {prop.Value} , {prop.Count}");
-			}
+			adObjects.Append(current.GetDirectoryEntry());	
 		}
+
+		Console.WriteLine(adObjects.Count);
     }
 }
