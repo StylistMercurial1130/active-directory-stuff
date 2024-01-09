@@ -26,16 +26,9 @@ class Program {
 			}
 		}
 		
-		string filter = "$(&(objectCategory=computer)(sAMAccountType=805306369))";
 
 		adObjects.ForEach(domainController => {
-			DirectorySearcher searcher = new DirectorySearcher(domainController);
-			searcher.SearchScope = SearchScope.Subtree;
-			searcher.Filter = filter;	
-			SearchResultCollection result = searcher.FindAll();
-			foreach(SearchResult res in result) {
-				Console.WriteLine(res.GetType().ToString());
-			}
+			Console.WriteLine(domainController.Name);	
 		});
 		
     }
