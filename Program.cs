@@ -21,7 +21,8 @@ class Program {
 			foreach(Domain dom in current.Children) {
 				adObjectsQueue.Enqueue(dom);	
 			}
-			adObjects.Append(current.GetDirectoryEntry());	
+			DirectoryEntry de = current.GetDirectoryEntry();
+			if(de != null) adObjects.Add(de);
 		}
 
 		Console.WriteLine(adObjects.Count);
