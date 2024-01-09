@@ -8,7 +8,7 @@ class Program {
         //var username = "DOM051902\\Administrator"; 
         //var password = "Control123";
      
-		DirectoryContext context = new DirectoryContext(DirectoryContextType.Forest,path);	
+		DirectoryContext context = new DirectoryContext(DirectoryContextType.Domain,path);	
 		Forest forest = Domain.GetDomain(context).Forest;
 
 		Queue<Domain> adObjectsQueue = new Queue<Domain>();
