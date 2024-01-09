@@ -40,7 +40,7 @@ class Program {
 		adObjects.ForEach(computer => {
 			Console.WriteLine($"computer : {computer.Name}");
 			foreach(string propertyName in computer.Properties.PropertyNames) 
-				Console.WriteLine($"propertyName : {propertyName}");
+				Console.WriteLine($"propertyName : {propertyName} : value : {computer.Properties[propertyName][0]}");
 			Console.WriteLine();
 		});
 			
