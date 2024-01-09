@@ -16,11 +16,10 @@ class Program {
 		return computers;
 	}	
 
-    public static void Main(String []args) {
-        var path = "dom051902.lab";
-        //var username = "DOM051902\\Administrator"; 
-        //var password = "Control123";
-     
+	public static void SearchForest() {
+		var path = "dom051902.lab";
+		//var username = "DOM051902\\Administrator"; 
+		//var password = "Control123";
 		DirectoryContext context = new DirectoryContext(DirectoryContextType.Domain,path);	
 		Forest forest = Domain.GetDomain(context).Forest;
 
@@ -43,6 +42,19 @@ class Program {
 				Console.WriteLine($"propertyName : {propertyName} : value : {computer.Properties[propertyName][0]}");
 			Console.WriteLine();
 		});
-			
+	}
+
+    public static void Main(String []args) {
+        var path = "GC://dom051902.lab";
+        var username = "DOM051902\\Administrator"; 
+        var password = "Control123";
+		DirectoryEntry de = new DirectoryEntry(path,username,password,AuthenticationTypes.Secure);		
+		string filter = "(&(objectClass=computer)(sAMAccountType=805306369))";
+		DirectorySearcher searcher = new DirectorySearcher(de);
+		searcher.Filter = filter;
+		searcher.SearchScope = SearchScope.Subtree;
+		foreach(SearchResult result in searcher.FindAll()) {
+			Console.WriteLine($"{result.Properties["cn"][0]}");	
+		}
     }
 }
