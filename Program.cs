@@ -3,6 +3,19 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Collections;
 
 class Program {
+	public static List<DirectoryEntry> getComputers(string domainName) {
+		DirectoryEntry directoryEntry = new DirectoryEntry($"LDAP://{domainName}");
+		DirectorySearcher searcher = new DirectorySearcher(directoryEntry);
+		searcher.Filter = "(objectClass=computer)";
+		List<DirectoryEntry> computers = new List<DirectoryEntry>();		
+		
+		foreach(SearchResult result in searcher.FindAll()) {
+			computers.Add(result.GetDirectoryEntry());
+		}
+
+		return computers;
+	}	
+
     public static void Main(String []args) {
         var path = "dom051902.lab";
         //var username = "DOM051902\\Administrator"; 
@@ -21,15 +34,11 @@ class Program {
 			foreach(Domain dom in current.Children) {
 				adObjectsQueue.Enqueue(dom);	
 			}
-			foreach(DomainController dc in current.DomainControllers) {
-				adObjects.Add(dc.GetDirectoryEntry());
-			}
+			ICollection<DirectoryEntry> computers = getComputers(current.Name); 
+			adObjects.AddRange(computers);
 		}
-		
 
-		adObjects.ForEach(domainController => {
-			Console.WriteLine(domainController.Name);	
-		});
-		
+		adObjects.ForEach(computer => Console.WriteLine(computer.Name));
+			
     }
 }
