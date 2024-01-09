@@ -8,7 +8,7 @@ class Program {
         //var username = "DOM051902\\Administrator"; 
         //var password = "Control123";
      
-		DirectoryContext context = new DirectoryContext(DirectoryContextType.Domain,path);	
+		DirectoryContext context = new DirectoryContext(DirectoryContextType.Forest,path);	
 		Forest forest = Domain.GetDomain(context).Forest;
 
 		Queue<Domain> adObjectsQueue = new Queue<Domain>();
@@ -21,8 +21,9 @@ class Program {
 			foreach(Domain dom in current.Children) {
 				adObjectsQueue.Enqueue(dom);	
 			}
-			DirectoryEntry de = current.GetDirectoryEntry();
-			adObjects.Add(de);
+			foreach(DomainController dc in current.DomainControllers) {
+				adObjects.Add(dc.GetDirectoryEntry());
+			}
 		}
 		
 		string filter = "$(&(objectCategory=computer)(sAMAccountType=805306369))";
