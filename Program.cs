@@ -30,7 +30,6 @@ class Program {
 
 		while(adObjectsQueue.Count != 0) {
 			Domain current = adObjectsQueue.Dequeue();	
-			Console.WriteLine($"{current.Name} : children count : {current.Children.Count}");
 			foreach(Domain dom in current.Children) {
 				adObjectsQueue.Enqueue(dom);	
 			}
@@ -38,7 +37,12 @@ class Program {
 			adObjects.AddRange(computers);
 		}
 
-		adObjects.ForEach(computer => Console.WriteLine(computer.Name));
+		adObjects.ForEach(computer => {
+			Console.WriteLine($"computer : {computer.Name}");
+			foreach(string propertyName in computer.Properties.PropertyNames) 
+				Console.WriteLine($"propertyName : {propertyName}");
+			Console.WriteLine();
+		});
 			
     }
 }
