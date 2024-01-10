@@ -46,7 +46,7 @@ class Program {
 
     public static void Main(String []args) {
         var path = "GC://dom051902.lab";
-		var ldap_path = "LDA://dom051902.lab";
+		var ldap_path = "LDAP://dom051902.lab";
         var username = "DOM051902\\Administrator"; 
         var password = "Control123";
 //		DirectoryEntry de = new DirectoryEntry(path,username,password,AuthenticationTypes.Secure);		
