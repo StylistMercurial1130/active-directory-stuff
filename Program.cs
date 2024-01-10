@@ -64,6 +64,7 @@ class Program {
 		ldap_searcher.SearchScope = SearchScope.Subtree;
 		ldap_searcher.Filter = filter;
 		foreach(SearchResult res in ldap_searcher.FindAll()) {
+			Console.WriteLine(res.GetDirectoryEntry().Name);
 			foreach(string props in res.Properties.PropertyNames) {
 				Console.WriteLine(props);
 			}
