@@ -49,16 +49,16 @@ class Program {
 		var ldap_path = "LDA://dom051902.lab";
         var username = "DOM051902\\Administrator"; 
         var password = "Control123";
-		DirectoryEntry de = new DirectoryEntry(path,username,password,AuthenticationTypes.Secure);		
+//		DirectoryEntry de = new DirectoryEntry(path,username,password,AuthenticationTypes.Secure);		
 		string filter = "(&(objectClass=computer)(sAMAccountType=805306369))";
-		DirectorySearcher searcher = new DirectorySearcher(de);
-		searcher.Filter = filter;
-		searcher.SearchScope = SearchScope.Subtree;
-		foreach(SearchResult result in searcher.FindAll()) {
-			foreach(string props in result.Properties.PropertyNames) {
-				Console.WriteLine(props);
-			}
-		}
+//		DirectorySearcher searcher = new DirectorySearcher(de);
+//		searcher.Filter = filter;
+//		searcher.SearchScope = SearchScope.Subtree;
+//		foreach(SearchResult result in searcher.FindAll()) {
+//			foreach(string props in result.Properties.PropertyNames) {
+//				Console.WriteLine(props);
+//			}
+//		}
 		DirectoryEntry ldap_de = new DirectoryEntry(ldap_path,username,password,AuthenticationTypes.Secure);
 		DirectorySearcher ldap_searcher = new DirectorySearcher(ldap_de);
 		ldap_searcher.SearchScope = SearchScope.Subtree;
