@@ -46,6 +46,7 @@ class Program {
 
     public static void Main(String []args) {
         var path = "GC://dom051902.lab";
+		var ldap_path = "LDA://dom051902.lab";
         var username = "DOM051902\\Administrator"; 
         var password = "Control123";
 		DirectoryEntry de = new DirectoryEntry(path,username,password,AuthenticationTypes.Secure);		
@@ -54,7 +55,18 @@ class Program {
 		searcher.Filter = filter;
 		searcher.SearchScope = SearchScope.Subtree;
 		foreach(SearchResult result in searcher.FindAll()) {
-			Console.WriteLine($"{result.Properties["cn"][0]}");	
+			foreach(string props in result.Properties.PropertyNames) {
+				Console.WriteLine(props);
+			}
+		}
+		DirectoryEntry ldap_de = new DirectoryEntry(ldap_path,username,password,AuthenticationTypes.Secure);
+		DirectorySearcher ldap_searcher = new DirectorySearcher(ldap_de);
+		ldap_searcher.SearchScope = SearchScope.Subtree;
+		ldap_searcher.Filter = filter;
+		foreach(SearchResult res in ldap_searcher.FindAll()) {
+			foreach(string props in res.Properties.PropertyNames) {
+				Console.WriteLine(props);
+			}
 		}
     }
 }
