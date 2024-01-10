@@ -63,7 +63,9 @@ class Program {
 		DirectorySearcher ldap_searcher = new DirectorySearcher(ldap_de);
 		ldap_searcher.SearchScope = SearchScope.Subtree;
 		ldap_searcher.Filter = filter;
-		List<string> properties = new List<string>(){"operating systems"};
+		List<string> properties = new List<string>(){
+			"operatingSystem","objectSid","sAMAccountName","dNSHostName"
+		};
 		ldap_searcher.PropertiesToLoad.AddRange(properties.ToArray());
 		foreach(SearchResult res in ldap_searcher.FindAll()) {
 			Console.WriteLine(res.GetDirectoryEntry().Name);
