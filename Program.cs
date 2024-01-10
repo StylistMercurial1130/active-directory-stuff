@@ -59,7 +59,7 @@ class Program {
 //				Console.WriteLine(props);
 //			}
 //		}
-		DirectoryEntry ldap_de = new DirectoryEntry(ldap_path,username,password,AuthenticationTypes.Secure);
+		DirectoryEntry ldap_de = new DirectoryEntry(path,username,password,AuthenticationTypes.Secure);
 		DirectorySearcher ldap_searcher = new DirectorySearcher(ldap_de);
 		ldap_searcher.SearchScope = SearchScope.Subtree;
 		ldap_searcher.Filter = filter;
