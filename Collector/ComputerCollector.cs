@@ -7,7 +7,7 @@ public class ComputerCollector : IADCollector , IDisposable {
 
     public ComputerCollector(string domain) {
         DirectoryContext context = new(DirectoryContextType.Domain,domain);
-        forest = Forest.GetForest(context); 
+        forest = Domain.GetDomain(context).Forest; 
     }
 
     public IEnumerable<ADObject> Collect(string filter,int pageSize) {
