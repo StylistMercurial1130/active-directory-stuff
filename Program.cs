@@ -4,7 +4,7 @@ using Object;
 
 public class Program {
     public static void Main(string []args) {
-        string filter = "";
+        string filter = "(&(objectCategory=computer)(sAMAccountType=805306369))";
         int pageSize = 1000;
         string domainName = "dom051902.lab";
         using(ComputerCollector? collector = (ComputerCollector?)CollectorFactory.CreateCollectorFromType(CollectorTypes.Computer,domainName)) {
