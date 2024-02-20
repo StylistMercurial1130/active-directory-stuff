@@ -8,5 +8,6 @@ public class Program {
 		const string account = "Administrator";
 		const string password = "Control123";
     	DirectoryEntry de = new DirectoryEntry(ldapPath,account,password,AuthenticationTypes.Secure); 
+		object nativeObj = de.NativeObject;
     }
 }
