@@ -11,7 +11,7 @@ public class Program {
 		try {
 			object nativeObj = de.NativeObject;
 		} catch(Exception ex) {
-			Console.WriteLine(ex.ToString());
+			throw new Exception(ex.ToString());
 		}
     }
 }
