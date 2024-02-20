@@ -4,13 +4,9 @@ using Object;
 
 public class Program {
     public static void Main(string []args) {
-        string filter = "(&(objectCategory=computer)(sAMAccountType=805306369))";
-        int pageSize = 1000;
-        string domainName = "dom051902.lab";
-        using(ComputerCollector? collector = (ComputerCollector?)CollectorFactory.CreateCollectorFromType(CollectorTypes.Computer,domainName)) {
-            foreach(Computer computer in collector.Collect(filter,pageSize)) {
-                Console.WriteLine(computer.GetName());
-            }
-        }
+		const string ldapPath = "LDAP://dom051903/dom051901.lab/DC=dom051903,DC=dom051901";
+		const string account = "Administrator";
+		const string password = "Control123";
+    	DirectoryEntry de = new DirectoryEntry(ldapPath,account,password,AuthenticationTypes.Secure); 
     }
 }
